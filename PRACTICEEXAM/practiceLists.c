@@ -20,12 +20,12 @@ Reteta* creareReteta(unsigned int nrar, char* pacient, char* doctor, char* statu
 {
     Reteta* reteta = (Reteta*)malloc(sizeof(Reteta));
     reteta->nr = nrar;
-    reteta->patientName = (char*)malloc(strlen(pacient)+1);
-    strcpy(reteta->patientName,pacient);
-    reteta->doctorName = (char*)malloc(strlen(doctor)+1);
-    strcpy(reteta->doctorName,doctor);
-    reteta->statut = (char*)malloc(strlen(statut)+1);
-    strcpy(reteta->statut,statut);
+    reteta->patientName = (char*)malloc(strlen(pacient) + 1);
+    strcpy(reteta->patientName, pacient);
+    reteta->doctorName = (char*)malloc(strlen(doctor) + 1);
+    strcpy(reteta->doctorName, doctor);
+    reteta->statut = (char*)malloc(strlen(statut) + 1);
+    strcpy(reteta->statut, statut);
     reteta->nrMedicamente = nrMedicamente;
     reteta->compensareProcent = compensare;
     return reteta;
@@ -42,10 +42,11 @@ void deleteReteta(Reteta** r)
 
 void afisareReteta(Reteta* reteta)
 {
-    if(reteta != NULL)
+    if (reteta != NULL)
     {
-    printf("\n %d, %s, %s, %s, %d, %.2f", reteta->nr,reteta->patientName,reteta->doctorName,reteta->statut,reteta->nrMedicamente,reteta->compensareProcent);
-    }else
+        printf("\n %d, %s, %s, %s, %d, %.2f", reteta->nr, reteta->patientName, reteta->doctorName, reteta->statut, reteta->nrMedicamente, reteta->compensareProcent);
+    }
+    else
     {
         printf("\nInregistrarea primita este nula");
     }
@@ -84,17 +85,17 @@ ListNode* insertTail_SL(ListNode* headList, Reteta* r)
 {
     ListNode* it = headList;
     ListNode* node = createNode(r);
-    if(headList == NULL)
+    if (headList == NULL)
     {
         headList = node;
     }
     else
     {
-    while(it->next)
-    {
-        it = it->next;
-    }
-    it->next = node;
+        while (it->next)
+        {
+            it = it->next;
+        }
+        it->next = node;
     }
     return headList;
 }
@@ -102,10 +103,10 @@ ListNode* insertTail_SL(ListNode* headList, Reteta* r)
 ListNode* insertHeadDoubleLinked(ListNode* headList, Reteta* r)
 {
     ListNode* node = createNode(r);
-    if(headList)
+    if (headList)
     {
-    node->next = headList;
-    headList->prev = node;
+        node->next = headList;
+        headList->prev = node;
     }
     return node;
 
@@ -115,21 +116,22 @@ ListNode* insertTailDoubleLinked(ListNode* headList, Reteta* r)
 {
     ListNode* iterator = headList;
     ListNode* node = createNode(r);
-    if(headList)
+    if (headList)
     {
-    while(headList->next)
-    {
-        headList = headList->next;
+        while (headList->next)
+        {
+            headList = headList->next;
+        }
+        node->prev = headList;
+        headList->next = node;
+        return iterator;
     }
-    node->prev = headList;
-    headList->next = node;
-    return iterator;
-    }else{
+    else {
         return node;
     }
 }
 
-ListNode* insertByNumber(ListNode* headList, int poz,Reteta* r)
+ListNode* insertByNumber(ListNode* headList, int poz, Reteta* r)
 {
     ListNode* node = createNode(r);
     ListNode* result = headList;
@@ -178,7 +180,7 @@ ListNode* insertByNumber(ListNode* headList, int poz,Reteta* r)
 
 void displayList(ListNode* headList)
 {
-    while(headList)
+    while (headList)
     {
         afisareReteta(headList->info);
         headList = headList->next;
@@ -187,7 +189,7 @@ void displayList(ListNode* headList)
 
 void deleteList(ListNode** headList)
 {
-    while(*headList)
+    while (*headList)
     {
         ListNode* tmp = (*headList);
         (*headList) = (*headList)->next;
@@ -197,9 +199,9 @@ void deleteList(ListNode** headList)
 
 void deleteNodeByKey(ListNode** headList, const char* key)
 {
-    if(*headList)
+    if (*headList)
     {
-        if(strcmp((*headList)->info->patientName, key) == 0)
+        if (strcmp((*headList)->info->patientName, key) == 0)
         {
             ListNode* tmp = *headList;
             *headList = (*headList)->next;
@@ -208,11 +210,11 @@ void deleteNodeByKey(ListNode** headList, const char* key)
         else
         {
             ListNode* iterator = *headList;
-            while(iterator->next != NULL && strcmp(iterator->next->info->patientName,key) != 0)
+            while (iterator->next != NULL && strcmp(iterator->next->info->patientName, key) != 0)
             {
                 iterator = iterator->next;
             }
-            if(iterator->next != NULL)
+            if (iterator->next != NULL)
             {
                 ListNode* tmp = iterator->next;
                 iterator->next = tmp->next;
@@ -227,20 +229,22 @@ void deleteAllNodesByKey(ListNode** headList, float key)
     ListNode* iterator = *headList;
     ListNode* previous = NULL;
     ListNode* nodeUrm = NULL;
-    while(iterator)
+    while (iterator)
     {
         nodeUrm = iterator->next;
-        if(iterator->info->compensareProcent == key)
+        if (iterator->info->compensareProcent == key)
         {
-            if(previous != NULL)
+            if (previous != NULL)
             {
                 previous->next = nodeUrm;
-            }else{
+            }
+            else {
                 (*headList) = (*headList)->next;
             }
 
             deleteNode(iterator);
-        }else
+        }
+        else
         {
             previous = iterator;
         }
@@ -248,25 +252,152 @@ void deleteAllNodesByKey(ListNode** headList, float key)
     }
 }
 
-Reteta** convertListSLToArray(ListNode* headList,int *size)
+Reteta** convertListSLToArray(ListNode* headList, int* size)
 {
-  Reteta** array = NULL;
-  if(headList != NULL)
-  {
-    while(headList)
+    Reteta** array = NULL;
+    if (headList != NULL)
     {
-        Reteta* info = headList->info;
-        Reteta** aux = array;
-        array = (Reteta**)malloc(sizeof(Reteta*) * ((*size) + 1));
-        for(int i=0; i<(*size); i++)
+        while (headList)
         {
-            array[i] = aux[i];
+            Reteta* info = headList->info;
+            Reteta** aux = array;
+            array = (Reteta**)malloc(sizeof(Reteta*) * ((*size) + 1));
+            for (int i = 0; i < (*size); i++)
+            {
+                array[i] = aux[i];
+            }
+            array[(*size)++] = info;
+            headList = headList->next;
         }
-        array[(*size)++] = info;
+    }
+    return array;
+}
+
+
+int pestePrag(unsigned char prag, ListNode* headList)
+{
+    int counter = 0;
+    while (headList)
+    {
+        if (headList->info->nrMedicamente > prag)
+        {
+            counter++;
+        }
         headList = headList->next;
     }
-  }
-  return array;
+
+    return counter;
+}
+
+void actualizareProcent(const char* key, float procent, ListNode** headList)
+{
+    ListNode* iterator = *headList;
+    while (iterator)
+    {
+        if (strcmp(iterator->info->patientName, key) == 0)
+        {
+            iterator->info->compensareProcent = procent;
+        }
+
+        iterator = iterator->next;
+    }
+}
+
+void stergereDupaPrag(unsigned char pragMedicamente, ListNode** headList)
+{
+    ListNode* iterator = *headList;
+    while (iterator)
+    {
+        if (iterator->info->nrMedicamente < pragMedicamente)
+        {
+            if (iterator == (*headList))
+            {
+                ListNode* tmp = *headList;
+                (*headList) = (*headList)->next;
+                (*headList)->prev = NULL;
+                deleteNode(tmp);
+                iterator = (*headList);
+            }
+            else if (iterator->next == NULL)
+            {
+                ListNode* tmp = iterator;
+                iterator->prev->next = NULL;
+                iterator = iterator->next;
+                deleteNode(tmp);
+            }
+            else
+            {
+                ListNode* tmp = iterator->next;
+                tmp->prev = iterator->prev;
+                iterator->prev->next = tmp;
+                deleteNode(iterator);
+                iterator = tmp;
+            }
+        }
+        else
+        {
+            iterator = iterator->next;
+        }
+    }
+
+}
+
+ListNode* insertHeadCircullarList(ListNode* headList, Reteta* r)
+{
+    ListNode* node = createNode(r);
+    if(headList)
+    {
+        ListNode* last = headList->prev;
+        node->next = headList;
+        node->prev = last;
+        last->next = node;
+        headList->prev = node;
+    }else
+    {
+        node->next = node;
+        node->prev = node;
+    }
+    return node;
+}
+
+void displayCircullarList(ListNode* headList)
+{
+    if(headList)
+    {
+        ListNode* first = headList;
+        do
+        {
+             afisareReteta(headList->info);
+             headList = headList->next;
+        }while(headList != first);
+    }
+}
+
+void splitCircularList(ListNode** headList, ListNode** secondList,const char* key)
+{
+    ListNode* first = *headList;
+    int it = 0;
+   do{
+        if(strcmp((*headList)->info->patientName,key) == 0)
+        {
+            break;
+        }
+        *headList = (*headList)->next;
+        it++;
+   }while((*headList) != first);
+
+   if(it == 0 || (*headList) != first)
+   {
+        ListNode* newFirst = (*headList)->next;
+        (*headList)->next = first;
+        (*headList) = first;
+        *secondList = newFirst;
+        while(newFirst->next != first)
+        {
+            newFirst = newFirst->next;
+        }
+        newFirst->next = (*secondList);
+   }
 }
 
 int main()
@@ -278,9 +409,9 @@ int main()
     // deleteReteta(&reteta);
     // afisareReteta(reteta);
 
-    FILE* fisier = fopen("listaRetete.txt","r");
+    FILE* fisier = fopen("listaRetete.txt", "r");
     //Reteta* retete[15];
-    if(fisier)
+    if (fisier)
     {
         char delimiter[] = ",";
         char* token = NULL;
@@ -289,26 +420,27 @@ int main()
         unsigned char nrMed = 0;
         float procent = 0;
         int index = 0;
-        while(fgets(buffer,sizeof(buffer),fisier))
+        while (fgets(buffer, sizeof(buffer), fisier))
         {
-            token = strtok(buffer,delimiter);
+            token = strtok(buffer, delimiter);
             nr = atoi(token);
-            token = strtok(NULL,delimiter);
-            strcpy(pacient,token);
-            token = strtok(NULL,delimiter);
-            strcpy(doctor,token);
-            token = strtok(NULL,delimiter);
-            strcpy(statut,token);
-            token = strtok(NULL,delimiter);
+            token = strtok(NULL, delimiter);
+            strcpy(pacient, token);
+            token = strtok(NULL, delimiter);
+            strcpy(doctor, token);
+            token = strtok(NULL, delimiter);
+            strcpy(statut, token);
+            token = strtok(NULL, delimiter);
             nrMed = atoi(token);
-            token = strtok(NULL,delimiter);
+            token = strtok(NULL, delimiter);
             procent = atof(token);
-            Reteta* r = creareReteta(nr,pacient,doctor,statut,nrMed,procent);
+            Reteta* r = creareReteta(nr, pacient, doctor, statut, nrMed, procent);
             //afisareReteta(r);
             //headList = insertHEAD_SL(headList, r);
             //headList = insertTail_SL(headList,r);
             //headList = insertHeadDoubleLinked(headList,r);
-            headList = insertTailDoubleLinked(headList,r);
+            //headList = insertTailDoubleLinked(headList, r);
+            headList = insertHeadCircullarList(headList,r);
         }
     }
     fclose(fisier);
@@ -320,17 +452,17 @@ int main()
     // printf("\n");
     // deleteAllNodesByKey(&headList,0.25);
     // displayList(headList);
-    displayList(headList);
-    Reteta* exemplu = creareReteta(6,"Stoica Mihai", "Doctor Wilson", "Bolnav Sever", 20, 0.35);
-    // headList = insertByNumber(headList,20,exemplu);
-    // headList = insertByNumber(headList,0,exemplu);
-    // headList = insertByNumber(headList,20,exemplu);
-    // headList = insertByNumber(headList,1,exemplu);
-    // headList = insertByNumber(headList,4,exemplu);
+   // displayList(headList);
+    //Reteta* exemplu = creareReteta(6, "Stoica Mihai", "Doctor Wilson", "Bolnav Sever", 20, 0.35);
+     //headList = insertByNumber(headList,20,exemplu);
+     //headList = insertByNumber(headList,0,exemplu);
+     //headList = insertByNumber(headList,20,exemplu);
+     //headList = insertByNumber(headList,1,exemplu);
+     //headList = insertByNumber(headList,4,exemplu);
 
 
     printf("\n");
-    displayList(headList);
+    //displayList(headList);
     // int iterator = 0;
     // Reteta** vector = convertListSLToArray(headList,&iterator);
     // for(int i=0; i< iterator; i++ )
@@ -340,6 +472,21 @@ int main()
     // vector[0]->compensareProcent = 0.10;
     // printf("\n %.2f",headList->info->compensareProcent);
 
+    // printf("\n%d", pestePrag(1, headList));
+    // actualizareProcent("Galusca Dorin", 0.50, &headList);
+    // displayList(headList);
+    // stergereDupaPrag(15, &headList);
+    //     //dispar 3 5 8
+    // printf("\n");
+    // displayList(headList);
+    displayCircullarList(headList);
+    printf("\n");
+    ListNode* list1 = NULL;
+    splitCircularList(&headList,&list1,"Georgescu Ana");
+    displayCircullarList(headList);
+    printf("\n");
+    displayCircullarList(list1);
+    
 
     return 0;
 }
