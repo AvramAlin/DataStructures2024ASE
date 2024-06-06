@@ -1,7 +1,8 @@
-1, Galusca Dorin , Doctor Mike, Foarte Bolnav,23,0.20
+1,Galusca Dorin, Doctor Mike, Foarte Bolnav,23,0.20
 2,Popescu Ion, Doctor Smith, Bolnav Cronic, 15, 0.30
 3,Ionescu Maria, Doctor Johnson, Bolnav Acut, 12, 0.25
 4,Vasilescu Andrei, Doctor Brown, Bolnav Moderat, 18, 0.15
 5,Dumitrescu Elena, Doctor Davis, Bolnav Ușor, 10, 0.10
 6,Stoica Mihai, Doctor Wilson, Bolnav Sever, 20, 0.35
 7,Georgescu Ana, Doctor Taylor, Bolnav Critic, 22, 0.40
+8,Ionescu Maria, Doctor Johnson, Bolnav Acut, 12, 0.25
