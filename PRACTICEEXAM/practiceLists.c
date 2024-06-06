@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 #define LINE_SIZE 256
 
 typedef struct Reteta
@@ -124,6 +125,53 @@ ListNode* insertTailDoubleLinked(ListNode* headList, Reteta* r)
     headList->next = node;
     return iterator;
     }else{
+        return node;
+    }
+}
+
+ListNode* insertByNumber(ListNode* headList, int poz,Reteta* r)
+{
+    ListNode* node = createNode(r);
+    ListNode* result = headList;
+    int i = 0;
+    if (headList)
+    {
+        while (headList)
+        {
+            if (i == poz)
+            {
+                if (headList != result)
+                {
+                    node->prev = headList->prev;
+                    node->next = headList;
+                    headList->prev->next = node;
+                    headList->prev = node;
+                }
+                else
+                {
+                    node->next = headList;
+                    headList->prev = node;
+                    result = node;
+                }
+                break;
+            }
+            headList = headList->next;
+            i++;
+        }
+        if (headList == NULL && i < poz)
+        {
+            headList = result;
+            while (headList->next)
+            {
+                headList = headList->next;
+            }
+            node->prev = headList;
+            headList->next = node;
+        }
+        return result;
+    }
+    else
+    {
         return node;
     }
 }
@@ -272,6 +320,16 @@ int main()
     // printf("\n");
     // deleteAllNodesByKey(&headList,0.25);
     // displayList(headList);
+    displayList(headList);
+    Reteta* exemplu = creareReteta(6,"Stoica Mihai", "Doctor Wilson", "Bolnav Sever", 20, 0.35);
+    // headList = insertByNumber(headList,20,exemplu);
+    // headList = insertByNumber(headList,0,exemplu);
+    // headList = insertByNumber(headList,20,exemplu);
+    // headList = insertByNumber(headList,1,exemplu);
+    // headList = insertByNumber(headList,4,exemplu);
+
+
+    printf("\n");
     displayList(headList);
     // int iterator = 0;
     // Reteta** vector = convertListSLToArray(headList,&iterator);
