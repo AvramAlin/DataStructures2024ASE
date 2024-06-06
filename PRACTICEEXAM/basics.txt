@@ -1,0 +1,4 @@
+1, Doru Petcu, 3000.25
+2, Marinela Petrovici, 4000.45
+3, Dorian Popa, 7000.10
+4, Avram Alin, 1000.00
