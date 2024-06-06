@@ -93,6 +93,23 @@ ListNode* convertStackToList(StackNode* topStack)
     return resultList;
 }
 
+void deleteStackNodeByKey(StackNode** topStack, const char* key)
+{
+    StackNode* auxStack = NULL;
+    Reteta* info = NULL;
+    while((info = popNode(topStack)) != NULL)
+    {
+        if(strcmp(info->patientName,key) != 0)
+        {
+            pushNode(&auxStack,info);
+        }
+    }
+    while((info = popNode(&auxStack)) != NULL)
+    {
+        pushNode(topStack,info);
+    }
+}
+
 int main()
 {
     //Reteta* reteta;
@@ -144,5 +161,12 @@ int main()
     displayList(listFromStack);
     printf("\n");
     displayStack(&topStack);
+    deleteStackNodeByKey(&topStack,"Stoica Mihai");
+    deleteStackNodeByKey(&topStack,"Galusca Dorin");
+    deleteStackNodeByKey(&topStack,"Popescu Ion");
+    deleteStackNodeByKey(&topStack, "Georgescu Ana");
+    printf("\n");
+    displayStack(&topStack);
+
 }
 

@@ -105,6 +105,25 @@ QueueNode* convertListToQueue(ListNode* headList)
 
     return tailQueue;
 }
+
+void deleteQueueNodeByKey(QueueNode** tailQueue, float percent)
+{
+    Reteta* info =  peekNode(*tailQueue);
+    Reteta* tmp = NULL;
+    int it =0;
+    while(tmp != info)
+    {
+        tmp = getNode(tailQueue);
+      
+        if(tmp->compensareProcent >= percent)
+        {
+           
+            putNode(tailQueue,tmp);
+        }
+
+        tmp = peekNode(*tailQueue);
+    }
+}
 int main()
 {
     FILE* fisier = fopen("listaRetete.txt", "r");
@@ -150,6 +169,9 @@ int main()
     printf("\nThis is the new queue");
     QueueNode* newQueue = convertListToQueue(testList);
     displayQueue(&newQueue);
+    deleteQueueNodeByKey(&tailQueue,0.30);
+    printf("\n");
+    displayQueue(&tailQueue);
 
 
     return 0;
