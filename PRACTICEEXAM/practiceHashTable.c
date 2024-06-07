@@ -20,9 +20,9 @@ HashNode* createHashNode(Reteta* info)
     return node;
 }
 
-int fHash(const char* key)
+int fHash(unsigned char key)
 {
-    return key[0] % HASH_SIZE;
+    return key % HASH_SIZE;
 }
 
 void initHashTable(HashNode*** hashTable)
@@ -44,13 +44,13 @@ void putHashTable(HashNode*** hashTable, Reteta* r)
         initHashTable(hashTable);
     }
     HashNode* node = createHashNode(r);
-    int hashValue = fHash(node->info->patientName);
+    int hashValue = fHash(node->info->nrMedicamente);
 
     node->next = (*hashTable)[hashValue];
     (*hashTable)[hashValue] = node;
 }
 
-Reteta* getHT(HashNode** hashTable, const char* key)
+Reteta* getHT(HashNode** hashTable, unsigned char key)
 {
     //compute hash value
     int index = fHash(key);
@@ -58,7 +58,7 @@ Reteta* getHT(HashNode** hashTable, const char* key)
     //search for the key
     while(collisionList)
     {
-        if(strcmp(collisionList->info->patientName,key) == 0)
+        if(collisionList->info->nrMedicamente == key)
         {
             return collisionList->info;
         }
@@ -67,13 +67,13 @@ Reteta* getHT(HashNode** hashTable, const char* key)
     return NULL;
 }
 
-void deleteHT(HashNode** hashTable, const char* key)
+void deleteHT(HashNode** hashTable, unsigned char key)
 {
     int index = fHash(key);
     HashNode* collisionList = hashTable[index];
     if(collisionList != NULL)
     {
-        if(strcmp(collisionList->info->patientName,key) == 0)
+        if(collisionList->info->nrMedicamente == key)
         {
             hashTable[index] = collisionList->next;
             deleteReteta(collisionList->info);
@@ -82,7 +82,7 @@ void deleteHT(HashNode** hashTable, const char* key)
         {
             while(collisionList->next)
             {
-                if(strcmp(collisionList->next->info->patientName,key) == 0)
+                if(collisionList->next->info->nrMedicamente == key)
                 {
                     HashNode* tmp = collisionList->next;
                     collisionList->next = tmp->next;
@@ -142,8 +142,10 @@ int main()
     }
     fclose(fisier);
     //data structure operations
-    Reteta* reteta = getHT(hashTable, "Ionescu Maria");
+    Reteta* reteta = getHT(hashTable, 15);
     afisareReteta(reteta);
+    printf("\n");
+    putHashTable(&hashTable,reteta);
 
     parcurgereHashTable(hashTable);
     return 0;
