@@ -1,0 +1,10 @@
+8,20,342,Gabriel Tanase
+6,40,123,Dorel Smecheru
+5,10,764,Dimitrie Cantemir
+7,60,2134,Felicia Dumitrescu
+10,70,231,Ronnie Hatzsus
+9,15,23412,Roxana Dumitru
+20,9,45,Avram Alin
+18,90,56,Constantin Miruna
+17,80,21,Dadada Milescu
+19,32,9,Dorian Popa
