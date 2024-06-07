@@ -108,6 +108,60 @@ void parcurgereHashTable(HashNode** hashTable)
         }
     }
 }
+
+Reteta** convertHTToArray(HashNode** hashTable, int* size)
+{
+    Reteta** array = NULL;
+    if(hashTable)
+    {
+        for(int i=0; i < HASH_SIZE; i++)
+        {
+            //if collision list is present
+            if(hashTable[i])
+            {
+                HashNode* list = hashTable[i];
+                while(list)
+                {
+                    Reteta* info = list->info;
+                    //array resize
+                    Reteta** aux = array;
+                    array = (Reteta**)malloc(sizeof(Reteta*) * ((*size)+1));
+                    for(int index = 0; index < *size; index++)
+                    {
+                        array[index] = aux[index];
+                    }
+                    array[(*size)++] = info;
+                    list = list->next;
+                }
+            }
+        }
+    }
+    return array;
+}
+
+ListNode* convertHTToListSL(HashNode** hashTable)
+{
+    ListNode* list = NULL;
+    if(hashTable)
+    {
+        for(int i=0;i<HASH_SIZE;i++)
+        {
+            if(hashTable[i])
+            {
+                HashNode* colList = hashTable[i];
+                while(colList)
+                {
+                    list = insertHEAD_SL(list,colList->info);
+                    colList = colList->next;
+                }
+            }
+        }
+    }
+
+    return list;
+}
+
+
 int main()
 {
     FILE* fisier = fopen("listaRetete.txt", "r");
@@ -148,5 +202,15 @@ int main()
     putHashTable(&hashTable,reteta);
 
     parcurgereHashTable(hashTable);
+    int size = 0;
+    Reteta** arrayR = convertHTToArray(hashTable,&size);
+    printf("\n");
+    for(int i=0;i<size;i++)
+    {
+        afisareReteta(arrayR[i]);
+    }
+    printf("\n");
+    ListNode* listaDinHashTable = convertHTToListSL(hashTable);
+    displayList(listaDinHashTable);
     return 0;
 }
