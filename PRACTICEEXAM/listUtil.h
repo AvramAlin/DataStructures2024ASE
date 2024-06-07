@@ -22,7 +22,7 @@ ListNode* createNode(Reteta* r)
 
 void deleteNode(ListNode* node)
 {
-    deleteReteta(&node->info);
+    deleteReteta(node->info);
     free(node);
 }
 

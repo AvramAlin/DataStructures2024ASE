@@ -28,13 +28,13 @@ Reteta* creareReteta(unsigned int nrar, char* pacient, char* doctor, char* statu
     return reteta;
 }
 
-void deleteReteta(Reteta** r)
+void deleteReteta(Reteta* r)
 {
-    free((*r)->patientName);
-    free((*r)->doctorName);
-    free((*r)->statut);
-    free(*r);
-    *r = NULL;
+    free(r->patientName);
+    free(r->doctorName);
+    free(r->statut);
+    free(r);
+    r = NULL;
 }
 
 void afisareReteta(Reteta* reteta)

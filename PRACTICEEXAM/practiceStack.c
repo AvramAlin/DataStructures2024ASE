@@ -36,6 +36,7 @@ Reteta* popNode(StackNode** topStack)
         result = (*topStack)->info;
         StackNode* tmp = (*topStack);
         (*topStack) = (*topStack)->next;
+        // deleteReteta(tmp->info);
         free(tmp);
     }
     return result;
