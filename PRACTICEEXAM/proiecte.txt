@@ -1,0 +1,10 @@
+12,Proiect UniuneEuropeana,Costel Dumitru,3,20.25
+13,Proiect FinantareNationala,Andrei Popescu,2,15.75
+14,Proiect CercetareStiintifica,Maria Ionescu,5,30.00
+15,Proiect DezvoltareLocala,Elena Vasilescu,4,25.50
+16,Proiect InovareTehnologica,Ionut Barbu,1,10.00
+17,Proiect Educatie,Tudor Manea,3,22.45
+18,Proiect Mediu,Ioana Georgescu,2,18.90
+19,Proiect Social,Ana Radu,4,27.35
+20,Proiect Sanatate,Vasile Pop,5,35.10
+21,Proiect Cultura,Daniela Marin,1,12.50
