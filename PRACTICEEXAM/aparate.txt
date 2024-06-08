@@ -1,0 +1,7 @@
+12,Masina de spalat, Foarte Buna, 800
+14, Aspirator, ok si bun, 400
+65, Blender, mixeaza tot, 500
+23, Router, semnal bun, 210
+67, Cuptor, prajeste tot, 1100
+89, RobotAspirator, curata tot ce vede pe mapa, 1500
+823, CuptorMicrounde, cel mai bun si scump, 1200
