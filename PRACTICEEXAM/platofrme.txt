@@ -1,0 +1,6 @@
+1,Instagram,24
+2,Facebook,19
+3,Tik Tok,40
+4,OnlyFans,70
+5,Twitter,21
+6,AmazonPrime,13
