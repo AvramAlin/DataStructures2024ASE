@@ -1,0 +1,9 @@
+1,Avram Alin, Sef marketing, 9000
+2,Constantin Miruna, Junior Developer, 5000
+3,Milescu Acrapovici, Director, 10000
+4,Dorian Popa, Influencer, 20000
+5,Elisabeta Stoian, CEO, 15000
+6,Hatz Jonule, Expert in hatz, 2000
+7,Vladimir Bira, Sofer pe barca, 3000
+8,Eduard Draghici, Sofer de autobuz, 4000
+9,Constantin Miruna, Bucatar Cofetar, 10456
