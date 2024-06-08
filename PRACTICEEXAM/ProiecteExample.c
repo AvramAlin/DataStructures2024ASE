@@ -181,6 +181,48 @@ void sortareList(ListNode* headList, ListNode** listaSortata)
     }
 }
 
+
+void exersareSortareLista(ListNode* headList, ListNode** sortedList)
+{
+    while(headList)
+    {
+        ListNode* newNode = createNode(headList->info);
+        //If the list is null
+        if(*sortedList == NULL)
+        {
+            (*sortedList) = newNode;
+        }
+        else
+        {
+            ListNode* current = *sortedList;
+            ListNode* prev = NULL;
+            while(current != NULL && current->info->bugetAlocat < newNode->info->bugetAlocat)
+            {
+                prev = current;
+                current = current->next;
+            }
+            if(prev == NULL) // este headList
+            {
+                newNode->next = *sortedList;
+                (*sortedList)->prev = newNode;
+                *sortedList = newNode;
+            }else if(current == NULL) // insert la sfarsit
+            {
+                newNode->prev = prev;
+                prev->next = newNode;
+            }
+            else // insert in the middle
+            {
+                newNode->next = current;
+                newNode->prev = prev;
+                prev->next = newNode;
+                current->prev = newNode;
+            }
+        }
+        headList = headList->next;
+    }
+}
+
 int main()
 {
     FILE* fisier = fopen("proiecte.txt","r");
@@ -217,7 +259,8 @@ int main()
     updateBugetLista(headList, 2504.23,"Andrei Popescu");
     displayList(headList);
     ListNode* listaSortata = NULL;
-    sortareList(headList,&listaSortata);
+    //sortareList(headList,&listaSortata);
+    exersareSortareLista(headList,&listaSortata);
     printf("\n");
     displayList(listaSortata);
 

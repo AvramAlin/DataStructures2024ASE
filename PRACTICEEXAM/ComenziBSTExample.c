@@ -143,10 +143,106 @@ void dezalocareBST(BinarySearchTree** root)
 	*root = NULL;
 }
 
+void deleteFullNode(BinarySearchTree** root, BinarySearchTree** rDesc)
+{
+	if ((*rDesc)->lChild)
+		deleteFullNode(root, &(*rDesc)->lChild);
+	else
+	{
+		stergereComanda((*root)->info);
+		(*root)->info = (*rDesc)->info;
+		BinarySearchTree* tmp = (*rDesc);
+		(*rDesc) = (*rDesc)->rChild;
+		free(tmp);
+	}
+}
+
+void deleteNodeByKeyBST(BinarySearchTree** root, int key)
+{
+	if (*root)
+	{
+		if ((*root)->info->id_comanda > key)
+			deleteNodeByKeyBST(&(*root)->lChild, key);
+		else if ((*root)->info->id_comanda < key)
+			deleteNodeByKeyBST(&(*root)->rChild, key);
+		else
+		{
+			//node is a leaf
+			if ((*root)->lChild == NULL && (*root)->rChild == NULL)
+			{
+				stergereComanda((*root)->info);
+				free(*root);
+				*root = NULL;
+			}
+			//1 desc node
+			else if ((*root)->rChild == NULL || (*root)->lChild == NULL)
+			{
+				BinarySearchTree* tmp = *root;
+				*root = tmp->lChild != NULL ? tmp->lChild : tmp->rChild;
+				stergereComanda(tmp->info);
+				free(tmp);
+			}
+			else // 2 desc node
+			{
+				deleteFullNode(root, &(*root)->rChild);
+			}
+		}
+	}
+}
+
+typedef struct Node
+{
+	struct Node* prev;
+	Comenzi* info;
+	struct Node* next;
+}ListNode;
+
+ListNode* createNode(Comenzi* r)
+{
+	ListNode* node = NULL;
+	node = (ListNode*)malloc(sizeof(ListNode));
+	node->info = r;
+	node->next = node->prev = NULL;
+	return node;
+}
+
+void deleteNode(ListNode* node)
+{
+	stergereComanda(node->info);
+	free(node);
+}
+
+ListNode* insertHEAD_SL(ListNode* headList, Comenzi* r)
+{
+	ListNode* node = createNode(r);
+	node->next = headList;
+	return node;
+}
+
+void displayList(ListNode* headList)
+{
+	while (headList)
+	{
+		afisareComanda(headList->info);
+		headList = headList->next;
+	}
+}
+
+void convertBSTToList(BinarySearchTree* root,ListNode** list)
+{
+	if (root)
+	{
+		convertBSTToList(root->lChild, list);
+		*list = insertHEAD_SL(*list, root->info);
+		convertBSTToList(root->rChild,list);
+	}
+}
+
 int main()
 {
 	Comenzi* r = NULL;
-	FILE* fisier = fopen("comenzi.txt", "r");
+	FILE* fisier = fopen("Text.txt", "r");
+	ListNode* headList = NULL;
 	BinarySearchTree* root = NULL;
 	if (fisier)
 	{
@@ -169,6 +265,7 @@ int main()
 
 			r = creareComanda(id, timp, cod, nume);
 			upsert(&root, r);
+			//headList = insertHEAD_SL(headList, r);
 		}
 		fclose(fisier);
 	}
@@ -185,6 +282,13 @@ int main()
 	}
 	printf("\n");
 	parcurgereInORDINE(root);
+	deleteNodeByKeyBST(&root, 18);
+	parcurgereInORDINE(root);
+	printf("\n");
+	//displayList(headList);
+	convertBSTToList(root,&headList);
+	displayList(headList);
 
     return 0;
+
 }
