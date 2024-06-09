@@ -1,0 +1,10 @@
+21,Hotel Sinaia,1,Avram Alin,1500
+22,Hotel Transilvania,2,Popescu Ion,1200
+23,Hotel Palace,3,Ionescu Maria,1800
+24,Hotel Continental,4,Georgescu Ana,2400
+25,Hotel Victoria,2,Andrei Mihai,1300
+26,Hotel Plaza,1,Vasilescu Elena,700
+27,Hotel Unirea,3,Andrei Mihai,1900
+28,Hotel Carol,1,Dumitrescu Gabriela,650
+29,Hotel International,2,Andrei Mihai,1250
+30,Hotel Modern,4,Stefanescu Daniela,2600
