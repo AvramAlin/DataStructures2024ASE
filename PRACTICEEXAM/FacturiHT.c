@@ -270,7 +270,7 @@ int main()
 	Factura* test = getFromHashTable(hashTable, "Agent Doru");
 	afisareFactura(test);
 	//deleteFromHash(hashTable, 4500);
-	//deleteHASHBYKEY(hashTable, "GoogleSCOM");
+	deleteHASHBYKEY(hashTable, "GoogleSCOM");
 	printf("\n");
 	parcurgereHashTable(hashTable);
 	determinarePuncteColiziune(hashTable);

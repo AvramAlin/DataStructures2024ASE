@@ -1,0 +1,7 @@
+1,Mercedes,3,150
+2,Volvo,6,525
+3,Mann,4.5,700
+4,Volswagen,3.2,420
+5,Toyota,2.1,400
+6,Audi,1.7,450
+7,DADADA,4.25,552
