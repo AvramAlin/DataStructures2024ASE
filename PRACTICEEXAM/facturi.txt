@@ -1,0 +1,6 @@
+21,Maria GroupSRL,Vicentiu Tudor, 2500, 32
+65,DorianPopaSRL,Marian Sperietoarea, 5000, 11
+23,FacebookSRL,Influencer Stefan, 1000, 3
+11,Meta,GoogleSCOM, 10000, 200
+4,TNB SRL,Avram Alin, 500, 16
+78,SRI SRL,Agent Doru, 6000, 75
