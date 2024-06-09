@@ -152,6 +152,41 @@ void deleteAllNodesByKeySecondTry(ListNode** headList, const char* key)
     }
 }
 
+void deleteOneNodeByKey(ListNode** headList, const char* key)
+{
+    if(*headList)
+    {
+        if(strcmp((*headList)->info->nume,key) == 0)
+        {
+            ListNode* tmp = *headList;
+            (*headList) = (*headList)->next;
+            (*headList)->prev = NULL;
+            deleteNode(tmp);
+        }else
+        {
+            ListNode* iterator = *headList;
+            while(iterator->next != NULL && strcmp(iterator->next->info->nume,key) != 0)
+            {
+                iterator = iterator->next;
+            }
+            if(iterator->next != NULL)
+            {
+                ListNode* tmp = iterator->next;
+                if(tmp->next)
+                {
+                    iterator->next = tmp->next;
+                    iterator->next->prev = iterator;
+                    deleteNode(tmp);
+                }else
+                {
+                    tmp->prev->next = NULL;
+                    deleteNode(tmp);
+                }
+            }
+        }
+    }
+}
+
 
 void displayInAmbeleSensuri(ListNode* headList)
 {
@@ -266,7 +301,10 @@ int main()
     }
 
     displayList(headList);
-    deleteAllNodesByKeySecondTry(&headList,"Constantin Miruna");
+    //deleteAllNodesByKeySecondTry(&headList,"Constantin Miruna");
+    deleteOneNodeByKey(&headList,"Constantin Miruna");
+    deleteOneNodeByKey(&headList,"Constantin Miruna");
+
     printf("\n");
     displayList(headList);
     printf("\n");
